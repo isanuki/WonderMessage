@@ -1,0 +1,76 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" docType="html-5.0" controller="WonderMsgSendController" applyHTMLTag="false" applyBodyTag="false">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Send Message</title>
+
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"/>
+    <apex:includeScript value="{!URLFOR($Resource.bootstrap, '/bootstrap-3.1.1-dist/js/bootstrap.min.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.bootstrap, '/bootstrap-3.1.1-dist/css/bootstrap.min.css')}" />
+
+    <script type="text/javascript">
+    $j = jQuery.noConflict();
+
+    function sendMessage(){
+      $j('#sendBtn').button('loading');
+      $j('#sendMsg').attr('disabled', 'disabled');
+      var msg = $j('#sendMsg').val();
+      
+      // エラーチェック
+      if(0 == msg.length){
+        $j('#modalMsg').text('メッセージを入力してください。');
+        $j('#closeModal').modal('show');
+        $j('#sendBtn').button('reset');
+        $j('#sendMsg').attr('disabled', false);
+        return;
+      }
+            
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.WonderMsgSendController.createMsg}',
+        msg,
+        function(result, event){
+          if(event.status){
+            $j('#modalMsg').text('受付が完了しました。');
+            $j('#closeModal').modal('show');
+            $j('#sendBtn').text('受付済');
+          } else {
+            $j('#modalMsg').text('ごめんなさい！メッセージはヤギさんが食べてしまいました。しばらくしてもからもう一度出してみてね。');
+            $j('#closeModal').modal('show');
+            $j('#sendBtn').text('もぐもぐ');
+          }
+        }
+      );
+    }
+        
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <form role="form">
+        <h3>浪江町の誰かにメッセージを送りましょう。</h3>
+        <div>
+          <textarea id="sendMsg" class="form-control" rows="8" placeholder="メッセージを入力しましょう"></textarea>
+        </div>
+        <br/>
+        <button type="button" id="sendBtn" class="btn btn-primary btn-lg btn-block" onclick="sendMessage()" data-loading-text="受付中...">受付</button>
+      </form>
+    </div>
+  
+    <div class="modal fade" id="closeModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h1 id="modalMsg">...</h1>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-block" data-dismiss="modal">閉じる</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </body>
+</apex:page>
