@@ -7,13 +7,17 @@
 独り言だったり、自分の近況、励ましのメッセージなど緩いメッセージを送信して、遠くにいる仲間に想いを届けましょう。
 
 #使い方
-Salesforce1アプリケーションのナビゲーションメニューから「ゆるメッセージ」を選び、メッセージを登録します。
-0～10日後、ランダムで選ばれたユーザのChatterフィードに通知のお知らせが届きます。
+Salesforce1アプリケーションのナビゲーションメニューから「ゆるメッセージ」を選び、メッセージを登録します。  
+0～10日後、ランダムで選ばれたユーザのChatterフィードに通知のお知らせが届きます。  
 受信者はリンクからメッセージを参照します。
 
+#資料
+slideshare
+<http://www.slideshare.net/isanuki/dev-maxcrows3>
+
 #技術要素
-・Salesforce1
-・Apex,Trigger
-・Visualforce
-・Bootstrap
-・ワークフロー（タイムトリガ）
+・Salesforce1  
+・Apex,Trigger  
+・Visualforce  
+・Bootstrap  
+・ワークフロー（タイムトリガ）  
