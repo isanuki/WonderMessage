@@ -13,7 +13,7 @@ Salesforce1アプリケーションのナビゲーションメニューから「
 
 #資料
 slideshare
-<http://www.slideshare.net/isanuki/dev-maxcrows3>
+<http://www.slideshare.net/isanuki/dev-maxcrows3-02>
 
 #技術要素
 ・Salesforce1  
